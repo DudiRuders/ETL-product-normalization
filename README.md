@@ -1,33 +1,35 @@
-# C.N.B.P
-Czyszczenie i normalizacja bazy produktów
+# ETL Pipeline: Product Data Normalization
 
-## Cel
-Ujednolicenie „brudnych” danych produktowych pochodzących z wielu źródeł (różne działy, różne formaty, skróty, błędy w nazwach).
+A robust Python-based ETL (Extract, Transform, Load) pipeline designed to clean, normalize, and standardize inconsistent retail product data from multiple disparate sources.
 
-## Problem
-- nazwy zawierają gramatury, skróty, literówki
-- te same produkty występują pod różnymi wariantami
-- dane są w wielu arkuszach i nie trzymają jednego standardu
+## 🎯 The Business Problem
+In retail and e-commerce, product data often comes from various departments and external vendors. This leads to:
+* Inconsistent naming conventions, typos, and abbreviations.
+* Varying formats for weights and dimensions (e.g., "500g", "0.5 kg", "500 gram").
+* Lack of standardization, making downstream processing, reporting, and database synchronization difficult.
 
-## Rozwiązanie (koncept)
-Pipeline ETL w Pythonie:
-1. import danych (CSV/XLSX)
-2. czyszczenie tekstu (spacje, znaki, skróty)
-3. ekstrakcja gramatur / jednostek
-4. normalizacja nazw i kategorii
-5. walidacja + raport błędów
-6. zapis do PostgreSQL / pliku wynikowego
+## 💡 The Solution
+This pipeline acts as a central data-cleansing engine. It ingests raw, "dirty" data and outputs a clean, unified dataset ready for analytics or database injection.
 
-## Technologie
-- Python
-- Pandas
-- (docelowo) PostgreSQL
-- (opcjonalnie) reguły normalizacji + słowniki
+### Key Features:
+* **Text Normalization:** Automated rules for text cleaning and standardizing naming conventions.
+* **Smart Extraction:** Advanced Regex patterns to accurately extract weights, volumes, and units regardless of the input format.
+* **Dictionary Mapping:** Utilizing replacement dictionaries for known abbreviations and brand names.
+* **Exception Handling:** Generates a separate report for edge cases and exceptions that require manual human validation, ensuring no data is silently corrupted.
+* **Flexible Output:** Processes data into clean `.csv` files or directly pushes it to a PostgreSQL database.
 
-## Efekt biznesowy
-- mniej błędów w promocjach i opisach
-- szybsza praca marketingu i działu danych
-- jedno źródło prawdy dla produktu
+## 🛠️ Tech Stack
+* **Language:** Python
+* **Data Processing:** Pandas, Regex
+* **Data Sources/Output:** CSV, XLSX, PostgreSQL
 
-## Status
-W trakcie rozwoju — repo zawiera koncepcję i strukturę projektu.
+## 🔄 Workflow Architecture
+1. **Extract:** Read raw data from `.csv` or `.xlsx` files originating from different departments.
+2. **Transform:** - Apply base string manipulation (lowercase, trim).
+   - Run Regex extraction for attributes (weights, sizes).
+   - Apply dictionary replacements.
+   - Flag anomalies for the exception report.
+3. **Load:** Export the cleaned dataset and the exception log to standard `.csv` files or inject directly into PostgreSQL tables.
+
+---
+*Note: This repository serves as a structural map and portfolio showcase. Sensitive data, production credentials, and proprietary business rules have been omitted for security reasons.*
