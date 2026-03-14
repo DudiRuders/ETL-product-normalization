@@ -31,11 +31,14 @@ This pipeline acts as a central data-cleansing engine. It ingests raw, "dirty" d
    - Flag anomalies for the exception report.
 3. **Load:** Export the cleaned dataset and the exception log to standard `.csv` files or inject directly into PostgreSQL tables.
 
+### ETL Pipeline Architecture
+
+```mermaid
 graph LR
-    A[Brudne Dane CSV] --> B(Skrypt Python/Pandas)
-    B --> C{Regex & Mapowanie}
-    C --> D[Znormalizowany PostgreSQL]
-    C --> E[Raport Wyjątków XLSX]
+    A[Raw Data CSV/XLSX] -->|Extract & Load| B(Python + Pandas)
+    B --> C{Validation & Cleaning}
+    C -->|Valid Records| D[(Normalized PostgreSQL)]
+    C -->|Errors / Missing| E[Exception Report XLSX]
 
 ---
 *Note: This repository serves as a structural map and portfolio showcase. Sensitive data, production credentials, and proprietary business rules have been omitted for security reasons.*
