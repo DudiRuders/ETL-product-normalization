@@ -42,3 +42,5 @@ graph LR
 ```
 ---
 *Note: This repository serves as a structural map and portfolio showcase. Sensitive data, production credentials, and proprietary business rules have been omitted for security reasons.*
+
+👉 **A sanitized, functional Proof-of-Concept (PoC) script with sample data is included in the `src/` and `data/` directories.**
