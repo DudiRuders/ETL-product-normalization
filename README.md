@@ -33,3 +33,9 @@ This pipeline acts as a central data-cleansing engine. It ingests raw, "dirty" d
 
 ---
 *Note: This repository serves as a structural map and portfolio showcase. Sensitive data, production credentials, and proprietary business rules have been omitted for security reasons.*
+
+graph LR
+    A[Brudne Dane CSV] --> B(Skrypt Python/Pandas)
+    B --> C{Regex & Mapowanie}
+    C --> D[Znormalizowany PostgreSQL]
+    C --> E[Raport Wyjątków XLSX]
