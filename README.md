@@ -33,12 +33,17 @@ This pipeline acts as a central data-cleansing engine. It ingests raw, "dirty" d
 
 ### ETL Pipeline Architecture
 
+```markdown
+### System Architecture
+
 ```mermaid
-graph LR
-    A[Raw Data CSV/XLSX] -->|Extract & Load| B(Python + Pandas)
-    B --> C{Validation & Cleaning}
-    C -->|Valid Records| D[(Normalized PostgreSQL)]
-    C -->|Errors / Missing| E[Exception Report XLSX]
+graph TD
+    A[Airtable Trigger] -->|Webhook| B(n8n Orchestrator)
+    B -->|JSON Payload| C{Custom Node.js API}
+    C -->|Render DOCX| C
+    C -->|Return File| B
+    B -->|Convert & Upload| D[Google Drive PDF]
+    D -->|Update Status| A
 
 ---
 *Note: This repository serves as a structural map and portfolio showcase. Sensitive data, production credentials, and proprietary business rules have been omitted for security reasons.*
