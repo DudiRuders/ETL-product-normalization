@@ -11,7 +11,7 @@ from src.etl_pipeline import normalize_text, extract_weight
     ("  mleko UHT  ", "Mleko Uht"),
     ("SER zolty Gouda", "Ser Zolty Gouda"),
     ("podwojna  spacja", "Podwojna Spacja"),
-    (np.nan, "Unknown")  # Twoja funkcja bezpiecznie zwraca "Unknown" dla pustych pól
+    (np.nan, "Unknown")
 ])
 def test_normalize_text(input_text, expected_text):
     """Testuje usuwanie białych znaków, formatowanie wielkości liter i obsługę NaN."""
@@ -26,7 +26,7 @@ def test_normalize_text(input_text, expected_text):
     ("Woda 1.5 l", "1500ml"),
     ("Sok 250ml", "250ml"),
     ("Ser 250G", "250g"),
-    ("Produkt bez wagi", "No Data")  # Twoja funkcja zwraca "No Data", gdy brak wagi
+    ("Produkt bez wagi", "No Data")
 ])
 def test_extract_weight(input_name, expected_weight):
     """Testuje wyciąganie wartości za pomocą Regex i przeliczanie jednostek (np. kg na g)."""
